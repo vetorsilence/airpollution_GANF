@@ -159,6 +159,7 @@ for i in range(0, len(coord_meo_stations)):
     x, y  = coord.convertToPoint()
     meo_point = Point(x, y)
     meo_points.append(meo_point)
+
 ##
 
 # Find bounding boxes where there is a meteorological data
@@ -175,16 +176,20 @@ for j in range(0, len(bb_meo_stations)):
 
 # there aren't stations - centroids
 
+aq_points = []
 for i in range(0, len(bb_aq_stations)):
-    rect = Bounding_box(i,2,Point(bb_aq_stations.loc[i, 0], bb_aq_stations.loc[i, 1]), Point(bb_aq_stations.loc[i, 2], bb_aq_stations.loc[i, 3]))
+    rect = Bounding_box(i,2,Point(bb_aq_stations.iloc[i, 0], bb_aq_stations.iloc[i, 1]), Point(bb_aq_stations.iloc[i, 2], bb_aq_stations.iloc[i, 3]))
     x_c, y_c = rect.getCenter()
     center = Point(x_c, y_c)
+    for meo_rect_ in meo_rect_meteorological:
+        if (center.isWithinBB(meo_rect_)):
+            aq_points.append(center)
 
-    if center.isWithinBB():
+##
+print(len(aq_points))
 
 
 ##
-
 # Preprocessing
 
 # Air Quality data

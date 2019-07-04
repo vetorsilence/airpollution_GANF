@@ -8,5 +8,5 @@ class Coord():
     def convertToPoint(self):
         in_proj = Proj(init='epsg:4326')
         out_proj = Proj(init='epsg:3857')
-        x, y = transform(in_proj, out_proj, self.lat, self.long)
+        x, y = transform(in_proj, out_proj, self.long, self.lat)
         return x, y
