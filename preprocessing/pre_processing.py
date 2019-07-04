@@ -6,8 +6,12 @@
 
 import pandas as pd
 import numpy as np
-import preprocessing.importClass
-from preprocessing.importClass import Point, Coord, Bounding_box, station
+
+from preprocessing.Station import Station
+from preprocessing.Point import Point
+from preprocessing.Coord import Coord
+from preprocessing.Bounding_box import Bounding_box
+
 ##
 
 # Read Data
@@ -75,11 +79,16 @@ mask = (meo_data['date'] > start_date) & (meo_data['date'] <= end_date)
 meo_data_60 = meo_data.loc[mask]
 
 ##
-meo_data_60.reset_index()
 
+# Reset index and nan = 0
+
+meo_data_60.reset_index()
+aq_data_60.reset_index()
+aq_data_60.fillna(0.0)
+meo_data_60.fillna(0.0)
 ##
 
-# Days without meteorological data ignore
+# Times without meteorological data is ignore
 
 count = 0
 station_ignore = []
@@ -89,8 +98,8 @@ for i in range(0,len(meo_data_60)):
     if(meo_data_60.iloc[i,10] != count):
         station_ignore.append(meo_data_60.iloc[i,0])
         date_ignore.append(meo_data_60.iloc[i,9])
-        time_ignore.append(meo_data_60.iloc[i,10])
-        print( meo_data_60.iloc[i,0],meo_data_60.iloc[i,9] , " ", meo_data_60.iloc[i,10])
+        time_ignore.append(count)
+        print( meo_data_60.iloc[i,0],meo_data_60.iloc[i,9] , " ", count)
         count += 1
     count += 1
     if(count > 23):
@@ -98,13 +107,80 @@ for i in range(0,len(meo_data_60)):
 
 ##
 
-# Description data
+# Times without pollutants
+
+count = 0
+for i in range(0,len(aq_data_60)):
+    if(aq_data_60.iloc[i,8] != count):
+        print( aq_data_60.iloc[i,0],aq_data_60.iloc[i,7] , " ", count)
+        count += 1
+    count += 1
+    if(count > 23):
+        count = 0
+
+
+##
+
+# values > 1000.0 = 0.0
 
 # Air Quality data
-aq_data.describe()
+
+for i in range(0,len(aq_data_60)):
+    for j in range(1,len(aq_data_60.columns)-2):
+        if(aq_data_60.iloc[i,j] >= 1000.0):
+            aq_data_60.iloc[i,j] = 0.0
+
+described_aq = aq_data_60.describe()
+
+print(described_aq)
+
+##
+
+# Meteorological values > = 999000 = 0.0
 
 # Meteorological data
-meo_data.describe()
+
+for i in range(0,len(meo_data_60)):
+    for j in range(1,len(meo_data_60.columns)-3):
+        if(meo_data_60.iloc[i,j] >= 999000.0):
+            meo_data_60.iloc[i,j] = 0.0
+
+described_meo = meo_data_60.describe()
+
+print(described_aq)
+
+##
+
+# Convert coordinates meteorological to points
+
+meo_points = []
+for i in range(0, len(coord_meo_stations)):
+    coord = Coord(coord_meo_stations.iloc[i, 0], coord_meo_stations.iloc[i, 1])
+    x, y  = coord.convertToPoint()
+    meo_point = Point(x, y)
+    meo_points.append(meo_point)
+##
+
+# Find bounding boxes where there is a meteorological data
+
+meo_rect_meteorological = []
+for j in range(0, len(bb_meo_stations)):
+    meo_rect = Bounding_box(j,6,Point(bb_meo_stations.iloc[j, 0], bb_meo_stations.iloc[j, 1]),Point(bb_meo_stations.iloc[j, 2], bb_meo_stations.iloc[j, 3]))
+    for meo_point in meo_points:
+        print(meo_point.x, meo_point.y)
+        if(meo_point.isWithinBB(meo_rect)):
+            meo_rect_meteorological.append(meo_rect)
+
+##
+
+# there aren't stations - centroids
+
+for i in range(0, len(bb_aq_stations)):
+    rect = Bounding_box(i,2,Point(bb_aq_stations.loc[i, 0], bb_aq_stations.loc[i, 1]), Point(bb_aq_stations.loc[i, 2], bb_aq_stations.loc[i, 3]))
+    x_c, y_c = rect.getCenter()
+    center = Point(x_c, y_c)
+
+    if center.isWithinBB():
 
 
 ##
@@ -114,7 +190,6 @@ meo_data.describe()
 # Air Quality data
 
 # Clean redundant data (same datetime)
-
 
 used_times = []
 count = 0
@@ -129,7 +204,7 @@ for i in range(0, len(aq_data)):
 
 # NAN and 9991 to 0
 aq_data.replace()
-aq_data.fillna(0.0)
+
 
 ##
 aq_data.describe()
@@ -149,3 +224,6 @@ for i in range(0, len(meo_data)):
     else:
         meo_data.drop(index=i,columns='utc_time')
     print(count)
+
+##
+
