@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ae4b63d-c384-4aac-80eb-fa3f823fd068" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/Coord.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/Coord.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/preprocessing/pre_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/preprocessing/pre_processing.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,16 +13,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="4" selection-start-column="4" selection-end-column="4" />
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/preprocessing/pre_processing.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="481">
@@ -87,7 +86,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/pre_processing.py" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/preprocessing/import_class.py" />
         <option value="$PROJECT_DIR$/preprocessing/importClass.py" />
         <option value="$PROJECT_DIR$/preprocessing/Station.py" />
@@ -95,6 +93,7 @@
         <option value="$PROJECT_DIR$/preprocessing/Point.py" />
         <option value="$PROJECT_DIR$/preprocessing/Coord.py" />
         <option value="$PROJECT_DIR$/preprocessing/pre_processing.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -185,7 +184,7 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15586796" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15586796" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -198,7 +197,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49938875" weight="0.3294979" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.084352076" side_tool="true" weight="0.29393306" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="10" sideWeight="0.9156479" visible="true" weight="0.29393306" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.9156479" visible="true" weight="0.29393306" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -244,13 +243,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="4" selection-start-column="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/preprocessing/Coord.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -286,6 +278,13 @@
           <folding>
             <element signature="e#53#72#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
