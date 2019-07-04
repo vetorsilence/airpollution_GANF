@@ -6,6 +6,7 @@
 
 import pandas as pd
 import numpy as np
+import math
 
 from preprocessing.Station import Station
 from preprocessing.Point import Point
@@ -162,6 +163,19 @@ for i in range(0, len(coord_meo_stations)):
 
 ##
 
+# Convert coordinates Air Quality to points
+
+aq_points = []
+for i in range(0, len(coord_aq_stations)):
+    coord = Coord(coord_aq_stations.iloc[i, 0], coord_aq_stations.iloc[i, 1])
+    x, y  = coord.convertToPoint()
+    aq_point = Point(x, y)
+    aq_points.append(aq_point)
+##
+
+print(len(aq_points))
+##
+
 # Find bounding boxes where there is a meteorological data
 
 meo_rect_meteorological = []
@@ -176,19 +190,39 @@ for j in range(0, len(bb_meo_stations)):
 
 # there aren't stations - centroids
 
-aq_points = []
+aq_without_station = []
 for i in range(0, len(bb_aq_stations)):
     rect = Bounding_box(i,2,Point(bb_aq_stations.iloc[i, 0], bb_aq_stations.iloc[i, 1]), Point(bb_aq_stations.iloc[i, 2], bb_aq_stations.iloc[i, 3]))
-    x_c, y_c = rect.getCenter()
-    center = Point(x_c, y_c)
-    for meo_rect_ in meo_rect_meteorological:
-        if (center.isWithinBB(meo_rect_)):
-            aq_points.append(center)
+    flag = True
+    for aq_station in aq_points:
+        if(aq_station.isWithinBB(rect)):
+            flag = False
+    if(flag):
+        x_c, y_c = rect.getCenter()
+        center = Point(x_c, y_c)
+        for meo_rect_ in meo_rect_meteorological:
+            if (center.isWithinBB(meo_rect_)):
+                aq_without_station.append(center)
 
 ##
+print(len(aq_without_station))
+aq_data_60 = aq_data_60.fillna(0)
+##
+
+# Find the values 0 in aqi vector of 60 days
+count = 0
+for i in range(0, len(aq_data_60)):
+    if(aq_data_60.iloc[i, 1] == 0):
+        print(aq_data_60.iloc[i, 0], " ", aq_data_60.iloc[i, 7], " ", aq_data_60.iloc[i, 8])
+        count+=1
+print(count)
+##
+
 print(len(aq_points))
 
 
+
+## TODO
 ##
 # Preprocessing
 

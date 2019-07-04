@@ -1,4 +1,4 @@
-import pyproj as Proj, transform
+from pyproj import Proj, transform
 
 class Point():
     def __init__(self, x, y):
